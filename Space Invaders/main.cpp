@@ -6,9 +6,18 @@
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(500, 500), "Space Invaders");
+    sf::RenderWindow window(sf::VideoMode(1500, 800), "Space Invaders");
     sf::RectangleShape player(sf::Vector2f(100.0f, 100.0f));
-  //  shape.setFillColor(sf::Color::Green);
+    sf::Texture playerTexture;
+    sf::Texture backgroundTexture;
+    sf::Sprite background;
+
+    backgroundTexture.loadFromFile("background.jpg");
+    background.setTexture(backgroundTexture);
+
+    player.setPosition(750.0f, 680.0f);
+    playerTexture.loadFromFile("spaceship.png");
+    player.setTexture(&playerTexture);
 
     while (window.isOpen())
     {
@@ -19,20 +28,15 @@ int main()
                 window.close();
             }
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) {
-            player.move(-0.1f, 0.0f);
+           if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) {
+            player.move(-0.5f, 0.0f);
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) {
-            player.move(0.1f, 0.0f);
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)) {
-            player.move(0.0f, -0.1f);
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)) {
-            player.move(0.0f, 0.1f);
+             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) {
+            player.move(0.5f, 0.0f);
         }
 
         window.clear();
+        window.draw(background);
         window.draw(player);
         window.display();
     }
