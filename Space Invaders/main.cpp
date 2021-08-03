@@ -6,21 +6,34 @@
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(200, 200), "Space Invaders");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+    sf::RenderWindow window(sf::VideoMode(500, 500), "Space Invaders");
+    sf::RectangleShape player(sf::Vector2f(100.0f, 100.0f));
+  //  shape.setFillColor(sf::Color::Green);
 
     while (window.isOpen())
     {
-        sf::Event event;
-        while (window.pollEvent(event))
+        sf::Event evnt;
+        while (window.pollEvent(evnt))
         {
-            if (event.type == sf::Event::Closed)
+            if (evnt.type == sf::Event::Closed) {
                 window.close();
+            }
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) {
+            player.move(-0.1f, 0.0f);
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) {
+            player.move(0.1f, 0.0f);
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)) {
+            player.move(0.0f, -0.1f);
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)) {
+            player.move(0.0f, 0.1f);
         }
 
         window.clear();
-        window.draw(shape);
+        window.draw(player);
         window.display();
     }
 
